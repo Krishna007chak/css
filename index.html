@@ -1,0 +1,47 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/3.0.6/infinite-scroll.pkgd.min.js"></script>
+
+
+JS Part
+// InfiniteScroll Settings
+var nextURL;
+function updateNextURL( doc ) {
+  nextURL = $( doc ).find('.aryapage-next').attr('href');
+  
+}
+updateNextURL( document );
+var $container = $('.contentmain').infiniteScroll({
+  path: function() {
+    return nextURL;
+  },
+
+  append: '.content',
+  history: 'push',
+  historyTitle: true,
+  status: '.page-load-status',
+  checkLastPage: '.aryapage-next'
+
+});
+$container.on( 'load.infiniteScroll', function( event, response, path ) {
+  updateNextURL( response );
+});
+ 
+
+
+HTML Part
+<div class="page-load-status">
+                        <div class="aload infinite-scroll-request">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <p class="infinite-scroll-last">ღƪ(ˆ◡ˆ)ʃ♡ That's all fancy text we have ♡ƪ(ˆ◡ˆ)ʃ♪</p>
+                        <p class="infinite-scroll-error">Error Contact<a
+                                href="mailto:?subject=Fancy%20Text%20Not%20Working;body=Site%20Not%20Working"
+                                target="_self" rel="noopener">hackersaitand@gmail.com</a></p>
+                    </div>
+                    <p class="aryapage">
+                        <a class="aryapage-next" href="symbolic.html">Next page</a>
+                    </p>
